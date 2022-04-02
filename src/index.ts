@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/auth', authRouter(app));
-app.use('/', apiRouter(app));
+app.use('/tsc', apiRouter(app));
 
 app.use(express.static(path.resolve('static')));
 
