@@ -195,7 +195,7 @@ function createFallback(res: Response) {
     doc.end();
 }
 
-module.exports = {
+export default {
     createCertificates,
     createProtocol,
     createFallback

@@ -1,6 +1,7 @@
 import express from 'express';
 import { TApp } from '../../types/TApp';
 import { apiOrm } from './index';
+import pdfGenerator from './utils/pdfGenerator';
 
 
 export function apiRouter(app: TApp) {
@@ -10,7 +11,7 @@ export function apiRouter(app: TApp) {
 
     router.route('/events')
         .get(async (req, res) => {
-            const events = await apiOrm.getEvents(req.query.id);
+            const events = await apiOrm.getEvents(parseInt(`${req.query.id}`));
             res.json(events);
         })
         .post(app.oauth.authorise(), async (req, res) => {
@@ -37,7 +38,7 @@ export function apiRouter(app: TApp) {
                     message: 'pass an id in query string'
                 });
             }
-            await apiOrm.deleteEvent(id);
+            await apiOrm.deleteEvent(parseInt(`${id}`));
             res.json({
                 success: true,
                 id
@@ -48,7 +49,7 @@ export function apiRouter(app: TApp) {
 
     router.route('/competitors')
         .get(async (req, res) => {
-            const competitors = await apiOrm.getCompetitors(req.query.id);
+            const competitors = await apiOrm.getCompetitors(parseInt(`${req.query.id}`));
             res.json(competitors);
         })
         .post(app.oauth.authorise(), async (req, res) => {
@@ -75,7 +76,7 @@ export function apiRouter(app: TApp) {
                     message: 'pass an id in query string'
                 });
             }
-            await apiOrm.deleteCompetitor(id);
+            await apiOrm.deleteCompetitor(parseInt(`${id}`));
             res.json({
                 success: true,
                 id
@@ -99,7 +100,7 @@ export function apiRouter(app: TApp) {
 
     // recover
 
-    router.get('/get_all', app.oauth.authorise(), async (req, res) => {
+    router.get('/get_all', app.oauth.authorise(), async (_, res) => {
         const [ events, competitors ] = await apiOrm.getAll();
         res.json({
             success: true,
@@ -116,7 +117,7 @@ export function apiRouter(app: TApp) {
                 message: 'pass an id in query string'
             });
         }
-        await apiOrm.recoverEvent(id);
+        await apiOrm.recoverEvent(parseInt(`${id}`));
         res.json({
             success: true,
             id
@@ -131,7 +132,7 @@ export function apiRouter(app: TApp) {
                 message: 'pass an id in query string'
             });
         }
-        await apiOrm.recoverCompetitor(id);
+        await apiOrm.recoverCompetitor(parseInt(`${id}`));
         res.json({
             success: true,
             id
@@ -140,17 +141,11 @@ export function apiRouter(app: TApp) {
 
     // clear cache
 
-    router.get('/clear_database', app.oauth.authorise(), async (req, res) => {
+    router.get('/clear_database', app.oauth.authorise(), async (_, res) => {
         await apiOrm.clearCache();
         res.json({
             success: true
         });
-    });
-
-    // redirect
-
-    router.get('*', (req, res) => {
-        res.send(`<!DOCTYPE html><html><head><script type="text/javascript">window.location.href = '../../../../../../tsc'</script></head></html>`);
     });
 
     return router;
