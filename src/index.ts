@@ -22,8 +22,8 @@ app.use('/tsc', apiRouter(app));
 app.use(express.static(path.resolve('static')));
 
 Promise.all([
-    apiOrm.sync(InitType.UPDATE),
     authOrm.sync(InitType.UPDATE),
+    apiOrm.sync(InitType.UPDATE),
 ])
     .then(() => {
         app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));

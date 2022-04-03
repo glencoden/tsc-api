@@ -33,7 +33,7 @@ class ApiOrm extends SequelizeOrm {
     // events
 
     getEvents(id: number): Promise<Model[]> {
-        if (!id) {
+        if (Number.isNaN(id)) {
             return this.Event.findAll({
                 where: { deleted: null }
             });
@@ -104,7 +104,7 @@ class ApiOrm extends SequelizeOrm {
     // competitors
 
     getCompetitors(id: number): Promise<Model[]> {
-        if (!id) {
+        if (Number.isNaN(id)) {
             return this.Competitor.findAll({
                 where: { deleted: null }
             });
@@ -121,7 +121,6 @@ class ApiOrm extends SequelizeOrm {
 
     addCompetitor(request: TJson): Promise<Model> {
         const {
-            id,
             name,
             gender,
             year,
@@ -130,7 +129,6 @@ class ApiOrm extends SequelizeOrm {
             results
         } = request;
         return this.Competitor.create({
-            id,
             name,
             gender,
             year,
