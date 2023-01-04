@@ -33,7 +33,10 @@ function registerUser(req, res) {
             sendResponse(res, 'user already exists');
             return;
         }
-        return index_1.authOrm.register(req.body.userName, req.body.password);
+        return index_1.authOrm.register({
+            userName: req.body.userName,
+            password: req.body.password
+        });
     })
         .then(() => {
         sendResponse(res, `registered ${req.body.userName}`);

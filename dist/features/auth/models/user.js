@@ -7,19 +7,7 @@ exports.default = {
         autoIncrement: true,
         primaryKey: true,
     },
-    firstName: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-    },
-    lastName: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-    },
     userName: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-    },
-    email: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
@@ -27,7 +15,5 @@ exports.default = {
         type: sequelize_1.DataTypes.TEXT,
         allowNull: false,
     },
-    settings: sequelize_1.DataTypes.JSON,
-    isAdmin: sequelize_1.DataTypes.BOOLEAN,
 };
 //# sourceMappingURL=user.js.map

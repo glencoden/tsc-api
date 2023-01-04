@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const SequelizeOrm_1 = __importDefault(require("../../db/SequelizeOrm"));
 const user_1 = __importDefault(require("./models/user"));
 const accessToken_1 = __importDefault(require("./models/accessToken"));
-const cardsAdmin_1 = __importDefault(require("./utils/cardsAdmin"));
+const adminUser_1 = __importDefault(require("./utils/adminUser"));
 const getShaPass_1 = require("./helpers/getShaPass");
 class AuthOrm extends SequelizeOrm_1.default {
     constructor(props) {
@@ -31,13 +31,14 @@ class AuthOrm extends SequelizeOrm_1.default {
             if (result.length > 0) {
                 return;
             }
-            return this.User.create(cardsAdmin_1.default);
+            return this.User.create(adminUser_1.default);
         })
             .then(result => console.log('created admin', result))
             .catch(err => console.log('error creating admin', err));
     }
     register(_a) {
         var { password } = _a, user = __rest(_a, ["password"]);
+        console.log(Object.assign({ password: (0, getShaPass_1.getShaPass)(password) }, user));
         return this.User.create(Object.assign({ password: (0, getShaPass_1.getShaPass)(password) }, user));
     }
     ;
