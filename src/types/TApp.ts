@@ -1,5 +1,5 @@
-import { Express } from 'express';
+import { Application } from 'express';
 
 export type TApp = {
     oauth?: any
-} & Express;
+} & Application;
