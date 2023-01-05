@@ -6,19 +6,7 @@ export default {
         autoIncrement: true,
         primaryKey: true,
     },
-    firstName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     userName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    email: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -26,6 +14,4 @@ export default {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    settings: DataTypes.JSON,
-    isAdmin: DataTypes.BOOLEAN,
 } as ModelAttributes;

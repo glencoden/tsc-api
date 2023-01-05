@@ -4,7 +4,8 @@
     "description": "node static server and api",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon dist/index.js"
+        "start": "nodemon dist/index.js",
+        "tsc": "tsc -w"
     },
     "author": "glencoden",
     "license": "ISC",

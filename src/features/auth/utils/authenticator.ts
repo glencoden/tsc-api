@@ -37,7 +37,10 @@ function registerUser(req, res) {
                 return;
             }
 
-            return authOrm.register(req.body.userName, req.body.password);
+            return authOrm.register({
+                userName: req.body.userName,
+                password: req.body.password
+            });
         })
         .then(() => {
             sendResponse(res, `registered ${req.body.userName}`);

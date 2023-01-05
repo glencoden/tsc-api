@@ -4,7 +4,7 @@ import { TUser } from './types/TUser';
 import SequelizeOrm from '../../db/SequelizeOrm';
 import userModel from './models/user';
 import accessTokenModel from './models/accessToken';
-import cardsAdmin from './utils/cardsAdmin';
+import adminUser from './utils/adminUser';
 import { getShaPass } from './helpers/getShaPass';
 
 
@@ -25,13 +25,17 @@ class AuthOrm extends SequelizeOrm {
                 if (result.length > 0) {
                     return;
                 }
-                return this.User.create(cardsAdmin)
+                return this.User.create(adminUser)
             })
             .then(result => console.log('created admin', result))
             .catch(err => console.log('error creating admin', err));
     }
 
     register({ password, ...user }: TUser): Promise<Model> {
+        console.log({
+            password: getShaPass(password),
+            ...user,
+        })
         return this.User.create({
             password: getShaPass(password),
             ...user,
