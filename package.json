@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon dist/index.js",
-        "start:dist": "node dist/index.js"
+        "start:dist": "node dist/index.js",
+        "tsc:prod": "tsc"
     },
     "author": "glencoden",
     "license": "ISC",
