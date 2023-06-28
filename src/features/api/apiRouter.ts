@@ -142,9 +142,10 @@ export function apiRouter(app: TApp) {
     // clear cache
 
     router.get('/clear_database', app.oauth.authorise(), async (_, res) => {
-        await apiOrm.clearCache();
+        // await apiOrm.clearCache();
         res.json({
-            success: true
+            success: true,
+            message: 'the deletion of database entries is currently disabled, because it caused a problem: when creating new events, they were assigned ids per auto increment, which previously belonged to deleted events, causing false relational competitor results to appear.'
         });
     });
 
